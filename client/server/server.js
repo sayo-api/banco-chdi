@@ -3,10 +3,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
+const path = require('path');
 
 const app = express();
 
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+app.use(cors({ origin: process.env.NODE_ENV === 'production' ? '*' : 'http://localhost:5173', credentials: true }));
 app.use(express.json());
 
 // Routes
@@ -15,6 +16,16 @@ app.use('/api/soldiers',    require('./routes/soldiers'));
 app.use('/api/fields',      require('./routes/fields'));
 app.use('/api/databases',   require('./routes/databases'));
 app.use('/api/permissions', require('./routes/permissions'));
+
+// Servir arquivos estáticos do frontend em produção
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'public')));
+  
+  // Fallback para SPA
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  });
+}
 
 // Connect MongoDB
 mongoose.connect(process.env.MONGO_URI)

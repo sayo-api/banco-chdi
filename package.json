@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "install": "npm install && npm install --prefix client && npm install --prefix server",
+    "install": "NODE_ENV= npm install && NODE_ENV= npm install --prefix client && NODE_ENV= npm install --prefix server",
     "build": "npm run build --prefix client",
     "start": "npm run start --prefix server",
     "dev": "concurrently \"npm run dev --prefix client\" \"npm run dev --prefix server\""
