@@ -1,14 +1,26 @@
 {
-  "name": "chdi-system",
+  "name": "chdi-system-full",
   "version": "1.0.0",
-  "private": true,
+  "description": "Sistema CHDI com Controle de Acesso por Página",
+  "main": "server/server.js",
   "scripts": {
-    "install": "NODE_ENV= npm install && NODE_ENV= npm install --prefix client && NODE_ENV= npm install --prefix server",
-    "build": "npm run build --prefix client",
-    "start": "npm run start --prefix server",
-    "dev": "concurrently \"npm run dev --prefix client\" \"npm run dev --prefix server\""
+    "postinstall": "npm install --prefix server && npm install --prefix client",
+    "build": "npm install --prefix client && npm run build --prefix client",
+    "start": "npm run server",
+    "server": "cd server && node server.js",
+    "client": "cd client && npm run dev",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "install-all": "npm install && npm install --prefix server && npm install --prefix client",
+    "preview": "cd client && npm run preview"
   },
+  "keywords": ["chdi", "control", "access", "permissions"],
+  "author": "CHDI",
+  "license": "MIT",
   "devDependencies": {
     "concurrently": "^8.2.0"
+  },
+  "engines": {
+    "node": "18.x",
+    "npm": "9.x"
   }
 }
