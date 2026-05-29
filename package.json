@@ -13,7 +13,12 @@
     "install-all": "npm install && npm install --prefix server && npm install --prefix client",
     "preview": "cd client && npm run preview"
   },
-  "keywords": ["chdi", "control", "access", "permissions"],
+  "keywords": [
+    "chdi",
+    "control",
+    "access",
+    "permissions"
+  ],
   "author": "CHDI",
   "license": "MIT",
   "devDependencies": {
@@ -22,5 +27,8 @@
   "engines": {
     "node": "18.x",
     "npm": "9.x"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
   }
 }
